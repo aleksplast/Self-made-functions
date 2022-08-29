@@ -1,15 +1,17 @@
-#include <stdio.h>
+    #include <stdio.h>
 
 #include "header.h"
 
-int my_puts (char* const s)
+int my_puts (const char* s)
 {
-    char* temp = s;
-
-    while (*temp != '\0')
+    while (*s != '\0')
     {
-        putchar(*temp);
-        temp++;
+        if (putchar(*s) == EOF)
+        {
+            return EOF;
+        }
+        else
+            s++;
     }
 
     printf("\n");
@@ -17,43 +19,77 @@ int my_puts (char* const s)
     return 0;
 }
 
-size_t my_strlen(char* const s)
+size_t my_strlen(const char* s)
 {
-    char* temp = s;
-    char* start = s;
+    const char* start = s;
 
-    while (*temp != '\0')
+    while (*s != '\0')
     {
-        temp++;
+        s++;
     }
 
-    return (temp - start);
+    return (s - start);
 }
 
-char* my_strcpy(char* dest, char* const source)
+char* my_strcpy(char* dest, const char* source)
 {
-    char* temp = source;
-    while (*dest != '\0')
-    {
-        *dest = *temp;
-        dest++;
-        temp++;
-    }
+    char* start = dest;
 
-    return dest;
+    while ((*dest++ = *source++) != '\0'){}
+
+    return start;
 }
 
-char* my_strncpy (char* dest, char* const source, size_t n)
+char* my_strncpy (char* dest, const char* source, size_t n)
 {
-    char* temp = source;
+    char* start = dest;
     int counter = 0;
-    while (*dest != '\0' && counter < n)
+
+    while ((*dest++) = (*source++) != '\0' && counter < n)
     {
-        *dest = *temp;
-        dest++;
-        temp++;
         counter++;
     }
 
-    return dest;
+    return start;
+}
+
+char* my_strcat(char* dest, const char* source)
+{
+    char* start = dest;
+
+    dest = dest + my_strlen(dest);
+
+    while (*source != '\0')
+    {
+        *dest++ = *source++;
+    }
+
+    return start;
+}
+
+int my_strcmp(const char* str1, const char* str2)
+{
+    for( ; *str1 == *str2; str1++, str2++)
+    {
+        if (*str1 == '\0')
+            return 0;
+    }
+    if (*str1 > *str2)
+        return 1;
+    else
+        return -1;
+}
+
+char* my_strchr(char* str, int ch)
+{
+    char* start = str;
+
+    while (*str != ch && *str != '\0')
+    {
+        str++;
+    }
+    if (*str == ch)
+        return str;
+    else
+        return NULL;
 }

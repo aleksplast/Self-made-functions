@@ -6,16 +6,9 @@
 int main()
 {
     char str[40] = "";
+    char* s = str;
+    s = gets(str);
+    puts(s);
 
-    gets(str);
-
-    char a[15] = "aBOAOFAAFE";
-    char b[15] = "ABONGUS";
-
-    char dest[120] = "";
-    my_strcpy(a,b);
-    printf("%s", a);
-    my_strcpy(dest, str);
-    printf("%s", dest);
 }
 
